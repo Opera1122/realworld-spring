@@ -1,0 +1,13 @@
+server:
+  port: 7777
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/parking
+    username: root
+    password: 1111
+
