@@ -2,12 +2,19 @@ server:
   port: 7777
 
 spring:
+  jackson:
+    serialization:
+      wrap_root_value: true
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
   datasource:
-    url: jdbc:mysql://localhost:3306/parking
+    url: jdbc:mysql://localhost:3306/REALWORLD
     username: root
     password: 1111
+
+jwt:
+  secret: taewoo
 
