@@ -5,6 +5,7 @@ package com.realworld.api.users;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.realworld.dto.user.login.LoginRequestDto;
 import com.realworld.dto.user.registry.UserRegisterDto;
 import com.realworld.service.UserService;
@@ -34,6 +35,7 @@ public class UsersApi {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
         log.info("로그인 요청: " + loginRequestDto);
+
         var res = userService.loginUser(loginRequestDto.getEmail(), loginRequestDto.getPassword());
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }

@@ -28,12 +28,24 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
+    private String[] ignoringPath = {
+            "/api/users/login" ,
+            "/api/user"
+    };
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
-        
+
+        if (Arrays.stream(ignoringPath).anyMatch(x ->
+                request.getRequestURI().equals(x))) {
+            filterChain.doFilter(request, response);
+        } else {
+            log.info("JwtTokenFilter");
+        }
+        filterChain.doFilter(request, response);
     }
 }
 
