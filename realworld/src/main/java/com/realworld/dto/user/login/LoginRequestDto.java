@@ -6,15 +6,20 @@ package com.realworld.dto.user.login;
 
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
-@JsonRootName("user")
+
+@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+@JsonTypeName("user")
 @Data
 @NoArgsConstructor
 public class LoginRequestDto {
+
     @Email(message = "이메일 포맷이 아닙니다.")
     @NotBlank(message = "이메일은 필수 값입니다.")
     private String email;

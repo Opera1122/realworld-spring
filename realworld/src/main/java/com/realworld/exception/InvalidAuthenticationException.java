@@ -8,7 +8,8 @@ package com.realworld.exception;
 import java.util.*;
 
 public class InvalidAuthenticationException extends RuntimeException {
+
     public InvalidAuthenticationException() {
-        super("이메일 혹은 비밀번호가 다릅니다.");
+        super("invalid email or password");
     }
 }

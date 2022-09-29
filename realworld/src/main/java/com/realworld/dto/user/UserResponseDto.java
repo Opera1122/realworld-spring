@@ -1,4 +1,4 @@
-package com.realworld.dto.user.login;
+package com.realworld.dto.user;
 
 /**
  * @author Taewoo
@@ -11,10 +11,10 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@JsonRootName("user")
 @AllArgsConstructor
 @Builder
-public class LoginResponseDto {
+@JsonRootName("user")
+public class UserResponseDto {
 
     private String email;
     private String token;
