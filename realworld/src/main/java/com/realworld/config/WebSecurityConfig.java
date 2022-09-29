@@ -39,21 +39,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf()
+        http.csrf()
                 .disable()
                 .cors()
                 .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.exceptionHandling()
-                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-
-        http.authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers(HttpMethod.POST, "/api/users/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user").authenticated();
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS)
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/articles/feed")
+                .authenticated()
+                .antMatchers(HttpMethod.POST, "/users", "/users/login")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/articles/**", "/profiles/**", "/tags")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
 
         http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

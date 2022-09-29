@@ -42,9 +42,7 @@ public class GlobalExceptionHandler {
     }
 
 
-
     @ExceptionHandler(Exception.class)
-
     public ResponseEntity<?> exceptionHandling(Exception e) {
         log.info(e.getLocalizedMessage());
         return ResponseEntity.badRequest().body("...");
